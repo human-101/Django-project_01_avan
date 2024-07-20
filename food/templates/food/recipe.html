@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipe</title>
+      <style>.container {
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+ column-gap: 5px;
+}
+body{
+background: #222;
+}
+img {
+  max-width: 80%;
+  max-height:80%;
+}
+
+.text {
+  font-size: 30px;
+}</style>
+  </head>
+  <body>
+  <div><h1 style="margin-left: 700px; font-size:70px; margin-bottom: 50px;color:#999;"><u>Recipe</u></h1></div>
+
+    <div class="container" style="margin-left: 300px; margin-top: 60px">
+      <div class="image">
+        <img style="height:600px" src="{{ object.image.url }}">
+      </div>
+      <div class="text" >
+        <h1 style="color:#999"><u>{{ object.name }}</u></h1>
+        <h5 style="color:#999">by {{ object.account.first_name }}</h5>
+        <h3 style="color:#999">{{ object.description }}</h3>
+      </div>
+    </div>
+  <div>
+    <h4 style="font-size: 40px;color:#999; font-family:cursive; margin-left: 300px">{{ object.recipe }}</h4>
+    <div>
+    <h4 style="font-size: 20px;color:#999; font-family:monopace; margin-left: 300px"><b><u>Author info</u></b></h4>
+      <h5 style="font-size: 20px;color:#999; font-family:monopace; margin-left: 300px">name: {{ object.account.first_name }} {{ object.account.last_name }}</h5>
+      <h5 style="font-size: 20px;color:#999; font-family:monopace; margin-left: 300px">email: {{ object.account.email }}</h5>
+    </div>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+    <script src="{% static 'js/notify.js' %}"></script>
+</head>
+<body style="background: #222;">
+
+    <div class="container p-2" >
+        <h1 style="color:white; font-family: impact; font-size:100px;" class="text-center m-5">All foods recipe</h1>
+        <div class="d-grid gap-4 col-9 row-20 mx-auto">
+        <a href="{% url 'food:create' %}" class="btn btn-light btn-lg"> <h5 style="font-family: fantasy; font-size: 30px;">Add Recipe</h5>
+            </a>
+        </div>
+    </div>
+
+
+       <div class="row" style=" margin-left: 370px; margin-top: 20px; ,margin-bottom: 10px;">
+            {% for food in foods %}
+
+            <div class="card mb-3" style="max-width: 900px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img style="height: 20rem; width:30rem;" src="{{ food.image.url }}" class="img-fluid rounded-start" alt="{{ food.name }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+
+        <h5 class="card-title">{{ food.name }}</h5>
+          <h6>by {{ food.account.first_name }} {{ food.account.last_name }}</h6>
+        <p class="card-text">{{ food.description }}</p>
+
+           {% if food.is_nonveg %}
+                    <div class="alert alert-danger" role="alert">
+  Non-Veg
+</div>
+          {% else %}
+                    <div class="alert alert-success" role="alert">
+Veg
+</div>
+          {% endif %}
+          <a href="{% url 'food:update' food.slug %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'food:remove' food.slug %}" class="btn btn-danger">Delete</a>
+          <div style="margin-top: 5px;">
+          <a href="{% url 'food:recipe' food.pk %}"><h5>view recipe-></h5></a>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+</script>
+
+</body>
+</html>
